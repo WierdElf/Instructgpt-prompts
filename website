@@ -1,0 +1,217 @@
+<link rel="stylesheet" href="styles.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brody</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Welcome to Brody's Website</h1>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <section id="about">
+    <h2>About Brody</h2>
+    <p>This is Brody's cool website. Stay tuned for updates!</p>
+  </section>
+  
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <p>Images coming soon...</p>
+  </section>
+  
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: brody@example.com</p>
+  </section>
+  
+  <footer>
+    <p>&copy; 2024 Brody's Website</p>
+  </footer>
+</body>
+</html>
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+header {
+  background: #333;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 10px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+section {
+  padding: 1rem;
+  margin: 1rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #333;
+  color: #fff;
+}<section id="games">
+  <h2>Play a Game: Guess the Number</h2>
+  <p>Try to guess a number between 1 and 10!</p>
+  <input type="number" id="guess" placeholder="Enter your guess">
+  <button onclick="playGame()">Submit</button>
+  <p id="result"></p>
+</section>
+
+<script>
+  // JavaScript for the Guess the Number game
+  const randomNumber = Math.floor(Math.random() * 10) + 1; // Random number between 1 and 10
+  let attempts = 3; // Number of attempts
+
+  function playGame() {
+    const userGuess = parseInt(document.getElementById('guess').value);
+    const result = document.getElementById('result');
+
+    if (isNaN(userGuess)) {
+      result.textContent = 'Please enter a valid number!';
+      return;
+    }
+
+    if (userGuess === randomNumber) {
+      result.textContent = '🎉 Congratulations! You guessed it right!';
+      result.style.color = 'green';
+    } else {
+      attempts--;
+      if (attempts > 0) {
+        result.textContent = `Wrong guess! You have ${attempts} attempts left.`;
+        result.style.color = 'red';
+      } else {
+        result.textContent = `Game Over! The correct number was ${randomNumber}.`;
+        result.style.color = 'black';
+        document.getElementById('guess').disabled = true;
+      }
+    }
+  }
+</script>
+<section id="for-sale">
+  <h2>For Sale</h2>
+  <p>Check out the items available for sale:</p>
+  <div id="items-container"></div>
+  
+  <!-- Add New Item Form -->
+  <h3>Add a New Item</h3>
+  <form id="add-item-form">
+    <label for="item-name">Item Name:</label>
+    <input type="text" id="item-name" placeholder="Enter item name" required>
+    <label for="item-price">Price ($):</label>
+    <input type="number" id="item-price" placeholder="Enter price" required>
+    <label for="item-description">Description:</label>
+    <textarea id="item-description" placeholder="Enter a short description" required></textarea>
+    <button type="submit">Add Item</button>
+  </form>
+</section>
+
+<script>
+  // JavaScript to handle the For Sale section
+  const itemsContainer = document.getElementById('items-container');
+  const addItemForm = document.getElementById('add-item-form');
+
+  // Function to add an item to the For Sale section
+  function addItem(name, price, description) {
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'item';
+    itemDiv.innerHTML = `
+      <h4>${name}</h4>
+      <p><strong>Price:</strong> $${price}</p>
+      <p>${description}</p>
+    `;
+    itemsContainer.appendChild(itemDiv);
+  }
+
+  // Handle form submission
+  addItemForm.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent page reload
+    const name = document.getElementById('item-name').value;
+    const price = document.getElementById('item-price').value;
+    const description = document.getElementById('item-description').value;
+
+    addItem(name, price, description);
+
+    // Clear form fields
+    addItemForm.reset();
+  });
+</script>
+#for-sale {
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 1rem 0;
+}
+
+#items-container .item {
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border-radius: 5px;
+  background: #f9f9f9;
+}
+
+#add-item-form label {
+  display: block;
+  margin: 0.5rem 0 0.2rem;
+}
+
+#add-item-form input,
+#add-item-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#add-item-form button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#add-item-form button:hover {
+  background: #0056b3;
+}
